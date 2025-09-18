@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boletim Final - Projeto JavaScript</title>
+  </head>
+
+  <body>
+    <h1>Boletim Final</h1>
+    <hr />
+
+    <script>
+      // MELHORIA #1: O código foi organizado em funções para facilitar a leitura e a manutenção.
+
+      function solicitarDados() {
+        // MELHORIA #2: Adicionada validação para garantir que o nome não seja vazio.
+        let nome;
+        do {
+          nome = String(window.prompt("Digite o seu nome: "));
+        } while (nome === "" || nome === "null"); // A comparação com 'null' é necessária caso o usuário clique em 'Cancelar'
+
+        // MELHORIA #3: As notas e pesos agora são armazenados em um array de objetos.
+        // Isso torna o código mais escalável, permitindo adicionar mais notas facilmente.
+        const notas = [];
+
+        for (let i = 1; i <= 3; i++) {
+          let nota;
+          // MELHORIA #2: Adicionada validação para garantir que o usuário digite um número válido.
+          do {
+            nota = Number(window.prompt(`Olá, ${nome}, digite a nota ${i}: `));
+          } while (isNaN(nota)); // isNaN() retorna true se o valor não for um número.
+
+          // Cada nota é adicionada como um objeto com a nota e o peso correspondente.
+          // O peso é definido pelo índice (1, 2, 3...)
+          notas.push({ nota: nota, peso: i });
+        }
+
+        return { nome: nome, notas: notas };
+      }
+
+      function calcularMedia(notas) {
+        // MELHORIA #4: Calculando a soma total das notas e a soma total dos pesos.
+        let somaNotasComPeso = 0;
+        let somaPesos = 0;
+
+        // MELHORIA #3: Usando um laço de repetição (for) para somar as notas e os pesos do array.
+        for (let i = 0; i < notas.length; i++) {
+          somaNotasComPeso += notas[i].nota * notas[i].peso;
+          somaPesos += notas[i].peso;
+        }
+
+        const mediaFinal = somaNotasComPeso / somaPesos;
+
+        return {
+          mediaFinal: mediaFinal,
+          somaNotasComPeso: somaNotasComPeso,
+          somaPesos: somaPesos,
+        };
+      }
+
+      function exibirBoletim(nome, notas, resultadoCalculo) {
+        const { mediaFinal, somaNotasComPeso, somaPesos } = resultadoCalculo;
+
+        window.alert(
+          `${nome}, clique em "ok" para acessar o seu boletim final.`
+        );
+
+        document.write(`<strong>${nome}</strong>, <br>`);
+
+        // MELHORIA #3: Usando um loop para exibir cada nota individualmente.
+        for (let i = 0; i < notas.length; i++) {
+          const notaComPeso = notas[i].nota * notas[i].peso;
+          document.write(
+            `A sua nota ${i + 1} foi ${notas[i].nota}, com o peso ${
+              notas[i].peso
+            } ficou: ${notaComPeso}. <br>`
+          );
+        }
+
+        // MELHORIA #4: Exibindo informações adicionais para um relatório mais detalhado.
+        document.write(`
+          <br>
+          O cálculo da sua média foi feito da seguinte forma: <br>
+          <strong>Soma das notas com peso</strong>: ${somaNotasComPeso}. <br>
+          <strong>Soma total dos pesos</strong>: ${somaPesos}. <br>
+          <br>
+        `);
+
+        document.write(
+          `Sendo assim, a sua média final foi: <strong>${mediaFinal.toFixed(
+            2
+          )}</strong>. <br>`
+        );
+
+        if (mediaFinal >= 7) {
+          document.write(`Você está <strong>APROVADO</strong>.`);
+        } else if (mediaFinal >= 5) {
+          document.write(`Você precisará fazer <strong>PROVA FINAL</strong>.`);
+        } else {
+          document.write(`Você está <strong>REPROVADO</strong>.`);
+        }
+      }
+
+      // Inicia a execução do programa chamando as funções na ordem correta.
+      const dadosDoAluno = solicitarDados();
+      const resultadoCalculo = calcularMedia(dadosDoAluno.notas);
+      exibirBoletim(dadosDoAluno.nome, dadosDoAluno.notas, resultadoCalculo);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Faturamento de Loja de Música</title>
+  </head>
+  <body>
+    <h1>Sistema de Faturamento de Loja de Música</h1>
+
+    <section>
+      <h2>Dados do Cliente</h2>
+      <form id="form-cliente">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" /><br /><br />
+
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf" /><br /><br />
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" /><br /><br />
+      </form>
+    </section>
+
+    <hr />
+
+    <section>
+      <h2>Adicionar Produtos</h2>
+      <form id="form-produtos">
+        <label for="produto">Produto:</label>
+        <select id="produto" name="produto"></select
+        ><br /><br />
+
+        <label for="quantidade">Quantidade:</label>
+        <input
+          type="number"
+          id="quantidade"
+          name="quantidade"
+          value="1"
+          min="1"
+        /><br /><br />
+
+        <button type="button" id="adicionar-produto">
+          Adicionar ao Pedido
+        </button>
+      </form>
+    </section>
+
+    <hr />
+
+    <section>
+      <h2>Resumo do Pedido</h2>
+      <div id="resumo-pedido"></div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
