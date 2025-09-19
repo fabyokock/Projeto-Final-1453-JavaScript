@@ -60,8 +60,13 @@
         };
       }
 
+      // function exibirBoletim(nome, notas, resultadoCalculo) {
+      //   const { mediaFinal, somaNotasComPeso, somaPesos } = resultadoCalculo;
+
       function exibirBoletim(nome, notas, resultadoCalculo) {
-        const { mediaFinal, somaNotasComPeso, somaPesos } = resultadoCalculo;
+        const mediaFinal = resultadoCalculo.mediaFinal;
+        const somaNotasComPeso = resultadoCalculo.somaNotasComPeso;
+        const somaPesos = resultadoCalculo.somaPesos;
 
         window.alert(
           `${nome}, clique em "ok" para acessar o seu boletim final.`
