@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boletim Final - Projeto JavaScript</title>
+  </head>
+  <body>
+    <h1>Boletim da Turma</h1>
+    <hr />
+
+    <div id="relatorio"></div>
+
+    <script>
+      // A nossa "base de dados" de alunos, onde todos os dados serão armazenados.
+      let turma = [];
+      const nomeDaTurma = window.prompt("Digite o nome da turma:");
+
+      // Variável para controlar o laço de repetição.
+      let continuar = true;
+
+      // ----------------------------------------------------------------------
+      // Funções do Sistema
+      // ----------------------------------------------------------------------
+
+      function adicionarAluno() {
+        const nome = window.prompt("Digite o nome do aluno:");
+        const notas = [];
+        for (let i = 1; i <= 3; i++) {
+          const nota = Number(window.prompt(`Digite a nota ${i} de ${nome}:`));
+          notas.push({ nota: nota, peso: i });
+        }
+
+        const novoAluno = {
+          nome: nome,
+          notas: notas,
+        };
+
+        // Usa o método push para adicionar o novo aluno ao array.
+        turma.push(novoAluno);
+        window.alert(`O aluno ${nome} foi adicionado com sucesso!`);
+      }
+
+      function alterarAluno() {
+        const nomeParaAlterar = window.prompt(
+          "Digite o nome do aluno para alterar:"
+        );
+
+        // Usa o método map para criar um novo array com as alterações.
+        turma = turma.map((aluno) => {
+          if (aluno.nome.toLowerCase() === nomeParaAlterar.toLowerCase()) {
+            const novaNota1 = Number(
+              window.prompt(`Digite a nova nota 1 de ${aluno.nome}:`)
+            );
+            const novaNota2 = Number(
+              window.prompt(`Digite a nova nota 2 de ${aluno.nome}:`)
+            );
+            const novaNota3 = Number(
+              window.prompt(`Digite a nova nota 3 de ${aluno.nome}:`)
+            );
+
+            aluno.notas[0].nota = novaNota1;
+            aluno.notas[1].nota = novaNota2;
+            aluno.notas[2].nota = novaNota3;
+
+            window.alert(`Os dados de ${aluno.nome} foram alterados.`);
+          }
+          return aluno;
+        });
+      }
+
+      function excluirAluno() {
+        const nomeParaExcluir = window.prompt(
+          "Digite o nome do aluno para excluir:"
+        );
+
+        // Usa o método filter para criar um novo array sem o aluno a ser excluído.
+        turma = turma.filter(
+          (aluno) => aluno.nome.toLowerCase() !== nomeParaExcluir.toLowerCase()
+        );
+
+        window.alert(`O aluno ${nomeParaExcluir} foi excluído.`);
+      }
+
+      function exibirRelatorio() {
+        let relatorioHTML = `<h2>Relatório da Turma: ${nomeDaTurma}</h2>`;
+
+        // Usa o método forEach para percorrer cada aluno no array 'turma'.
+        turma.forEach((aluno) => {
+          let somaNotasComPeso = 0;
+          let somaPesos = 0;
+
+          aluno.notas.forEach((nota) => {
+            somaNotasComPeso += nota.nota * nota.peso;
+            somaPesos += nota.peso;
+          });
+
+          const mediaFinal = somaNotasComPeso / somaPesos;
+          const status =
+            mediaFinal >= 7
+              ? "APROVADO"
+              : mediaFinal >= 5
+              ? "PROVA FINAL"
+              : "REPROVADO";
+
+          relatorioHTML += `
+            <hr>
+            <h3>Aluno: ${aluno.nome}</h3>
+            <p>A nota 1 foi ${aluno.notas[0].nota}, com o peso ${
+            aluno.notas[0].peso
+          } ficou: ${aluno.notas[0].nota * aluno.notas[0].peso}.</p>
+            <p>A nota 2 foi ${aluno.notas[1].nota}, com o peso ${
+            aluno.notas[1].peso
+          } ficou: ${aluno.notas[1].nota * aluno.notas[1].peso}.</p>
+            <p>A nota 3 foi ${aluno.notas[2].nota}, com o peso ${
+            aluno.notas[2].peso
+          } ficou: ${aluno.notas[2].nota * aluno.notas[2].peso}.</p>
+            <p>O cálculo da média foi feito da seguinte forma:</p>
+            <ul>
+              <li><strong>Soma das notas com peso</strong>: ${somaNotasComPeso}</li>
+              <li><strong>Soma total dos pesos</strong>: ${somaPesos}</li>
+            </ul>
+            <p>Sendo assim, a média final foi: ${mediaFinal.toFixed(2)}</p>
+            <p>O aluno <strong>${
+              aluno.nome
+            }</strong> está <strong>${status}</strong></p>
+          `;
+        });
+
+        document.getElementById("relatorio").innerHTML = relatorioHTML;
+      }
+
+      // ----------------------------------------------------------------------
+      // Lógica Principal do Programa
+      // ----------------------------------------------------------------------
+
+      while (continuar) {
+        const opcao = window.prompt(
+          "Escolha uma opção:\n\n" +
+            "1 - Adicionar novo aluno\n" +
+            "2 - Alterar dados de um aluno\n" +
+            "3 - Excluir um aluno\n" +
+            "4 - Gerar relatório detalhado\n" +
+            "5 - Sair"
+        );
+
+        switch (opcao) {
+          case "1":
+            adicionarAluno();
+            break;
+          case "2":
+            alterarAluno();
+            break;
+          case "3":
+            excluirAluno();
+            break;
+          case "4":
+            exibirRelatorio();
+            break;
+          case "5":
+            continuar = false;
+            window.alert(
+              "Obrigado por utilizar o sistema. O programa será encerrado."
+            );
+            break;
+          default:
+            window.alert("Opção inválida. Tente novamente.");
+            break;
+        }
+      }
+    </script>
+  </body>
+</html>
