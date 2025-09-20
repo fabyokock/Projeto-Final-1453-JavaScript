@@ -7,18 +7,25 @@
   </head>
   <body>
     <h1>SISTEMA DE BOLETIM</h1>
+
     <hr />
+
     <div id="nomeDaTurma"></div>
+
     <hr />
+
     <h3>Boletim Geral</h3>
+
+    <div id="tabelaGeral"></div>
+
     <hr />
-    <h3>Relatório Detalhado por Aluno</h3>
+
     <div id="relatorio"></div>
 
     <script>
-      const turma = [];
+      let turma = [];
 
-      const nomeDaTurma = window.prompt(`Digite o nome da turma:`);
+      let nomeDaTurma = window.prompt(`Digite o nome da turma:`);
 
       document.getElementById(
         `nomeDaTurma`
@@ -55,9 +62,11 @@
         const nomeParaAlterar = window.prompt(
           `Digite o nome do aluno para alterar:`
         );
-        turma.map;
-        (aluno) => {
-          if (aluno.nome === nomeParaAlterar) {
+        turma = turma.map((aluno) => {
+          if (
+            aluno.nome.toLocaleLowerCase() ===
+            nomeParaAlterar.toLocaleLowerCase()
+          ) {
             const novaNota1 = Number(
               window.prompt(`Digite a nova nota 1 de ${aluno.nome}:`)
             );
@@ -75,9 +84,11 @@
             window.alert(
               `Os dados de ${aluno.nome} foram alterados com sucesso!`
             );
+          } else {
+            window.alert(`Aluno ${nomeParaAlterar} não encontrado.`);
           }
           return aluno;
-        };
+        });
       }
 
       // ----------------------------------------------------------------------
@@ -88,24 +99,45 @@
         const nomeParaExcluir = window.prompt(
           `Digite o nome do aluno para excluir:`
         );
-        turma = turma.filter((aluno) => aluno.nome !== nomeParaExcluir);
-        window.alert(`O aluno ${nomeParaExcluir} foi excluído com sucesso!`);
+
+        const tamanhoAntes = turma.length;
+
+        turma = turma.filter(
+          (aluno) =>
+            aluno.nome.toLowerCase() !== nomeParaExcluir.toLocaleLowerCase()
+        );
+
+        if (turma.length < tamanhoAntes) {
+          window.alert(`O aluno ${nomeParaExcluir} foi excluído com sucesso!`);
+        } else {
+          window.alert(`Aluno ${nomeParaExcluir} não encontrado.`);
+        }
       }
 
       // ----------------------------------------------------------------------
-      // Exibir o Relatório
+      // Exibir Tabela Geral
       // ----------------------------------------------------------------------
-      function exibirRelatorio() {
-        //  let relatorio = `<h2>Relatório da Turma: ${nomeDaTurma}</h2>`;
-
-        let relatorio;
+      function exibirTabelaGeral() {
+        let tabelaHTML = `
+          <table border="1" style="width:100%; text-align:center;">
+            <thead>
+              <tr>
+                <th>NOME</th>
+                <th>NOTA 1</th>
+                <th>NOTA 2</th>
+                <th>NOTA 3</th>
+                <th>MÉDIA</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
 
         turma.forEach((aluno) => {
-          const notas = aluno.notas;
           let somaNotasComPeso = 0;
           let somaPesos = 0;
 
-          notas.forEach((nota) => {
+          aluno.notas.forEach((nota) => {
             somaNotasComPeso = somaNotasComPeso + nota.nota * nota.peso;
             somaPesos = somaPesos + nota.peso;
           });
@@ -115,30 +147,81 @@
             mediaFinal >= 7
               ? `APROVADO`
               : mediaFinal >= 5
-              ? `de PROVA FINAL`
+              ? `EM PROVA FINAL`
               : `REPROVADO`;
 
-          relatorio = `<hr>
-                 <h3>Aluno: ${aluno.nome}</h3>
-                 <p>A nota 1 foi ${notas[0].nota}, com o peso ${
-            notas[0].peso
-          } ficou: ${notas[0].nota * notas[0].peso}.</p>
-                 <p>A nota 2 foi ${notas[1].nota}, com o peso ${
-            notas[1].peso
-          } ficou: ${notas[1].nota * notas[1].peso}.</p>
-                 <p>A nota 3 foi ${notas[2].nota}, com o peso ${
-            notas[2].peso
-          } ficou ${notas[2].nota * notas[2].peso}.</p>
-                 <p>O cálculo da média foi feito da seguinte forma:</p>
-                 <ul>
-                 <li><strong>Soma das notas com peso</strong>: ${somaNotasComPeso}</li>
-                 <li><strong>Soma total dos pesos</strong>: ${somaPesos}</li>
-                 </ul>
-                 <p>Sendo assim, a média final foi: ${mediaFinal.toFixed(2)}</p>
-                 <p>O aluno <strong>${
-                   aluno.nome
-                 }</strong> está <strong>${status}</strong></p>
-                 `;
+          tabelaHTML =
+            tabelaHTML +
+            `
+            <tr>
+              <td>${aluno.nome}</td>
+              <td>${aluno.notas[0].nota}</td>
+              <td>${aluno.notas[1].nota}</td>
+              <td>${aluno.notas[2].nota}</td>
+              <td>${mediaFinal.toFixed(2)}</td>
+              <td>${status}</td>
+            </tr>
+          `;
+        });
+
+        tabelaHTML =
+          tabelaHTML +
+          `
+            </tbody>
+          </table>
+        `;
+
+        document.getElementById(`tabelaGeral`).innerHTML = tabelaHTML;
+      }
+
+      // ----------------------------------------------------------------------
+      // Exibir o Relatório
+      // ----------------------------------------------------------------------
+      function exibirRelatorio() {
+        let relatorio = `<h3>Relatório Detalhado por Aluno:</h3>`;
+
+        turma.forEach((aluno) => {
+          let somaNotasComPeso = 0;
+          let somaPesos = 0;
+
+          aluno.notas.forEach((nota) => {
+            somaNotasComPeso = somaNotasComPeso + nota.nota * nota.peso;
+            somaPesos = somaPesos + nota.peso;
+          });
+
+          const mediaFinal = somaNotasComPeso / somaPesos;
+          const status =
+            mediaFinal >= 7
+              ? `APROVADO`
+              : mediaFinal >= 5
+              ? `EM PROVA FINAL`
+              : `REPROVADO`;
+
+          relatorio =
+            relatorio +
+            `<hr>
+                     <h3>Aluno: ${aluno.nome}</h3>
+                     <p>A nota 1 foi ${aluno.notas[0].nota}, com o peso ${
+              aluno.notas[0].peso
+            } ficou: ${aluno.notas[0].nota * aluno.notas[0].peso}.</p>
+                     <p>A nota 2 foi ${aluno.notas[1].nota}, com o peso ${
+              aluno.notas[1].peso
+            } ficou: ${aluno.notas[1].nota * aluno.notas[1].peso}.</p>
+                     <p>A nota 3 foi ${aluno.notas[2].nota}, com o peso ${
+              aluno.notas[2].peso
+            } ficou ${aluno.notas[2].nota * aluno.notas[2].peso}.</p>
+                     <p>O cálculo da média foi feito da seguinte forma:</p>
+                     <ul>
+                     <li><strong>Soma das notas com peso</strong>: ${somaNotasComPeso}</li>
+                     <li><strong>Soma total dos pesos</strong>: ${somaPesos}</li>
+                     </ul>
+                     <p>Sendo assim, a média final foi: ${mediaFinal.toFixed(
+                       2
+                     )}</p>
+                     <p>O aluno <strong>${
+                       aluno.nome
+                     }</strong> está <strong>${status}</strong></p>
+                     `;
         });
         document.getElementById(`relatorio`).innerHTML = relatorio;
       }
