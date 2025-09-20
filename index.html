@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistema de Boletim</title>
+    <link rel="stylesheet" href="styleC.css" />
   </head>
   <body>
     <h1>SISTEMA DE BOLETIM</h1>
@@ -31,7 +32,7 @@
         `nomeDaTurma`
       ).innerHTML = `<h2>Nome da Turma: ${nomeDaTurma}</h2>`;
 
-      let continuar = true;
+      let continuar = true; // Usado no switch/case
 
       // ----------------------------------------------------------------------
       // FUNÇÕES DO SISTEMA
@@ -53,6 +54,8 @@
         turma.push(novoAluno);
 
         window.alert(`O aluno ${nome} foi adicionado com sucesso!`);
+
+        exibirTabelaGeral();
       }
 
       // ----------------------------------------------------------------------
@@ -89,6 +92,8 @@
           }
           return aluno;
         });
+
+        exibirTabelaGeral();
       }
 
       // ----------------------------------------------------------------------
@@ -112,6 +117,8 @@
         } else {
           window.alert(`Aluno ${nomeParaExcluir} não encontrado.`);
         }
+
+        exibirTabelaGeral();
       }
 
       // ----------------------------------------------------------------------
@@ -119,7 +126,7 @@
       // ----------------------------------------------------------------------
       function exibirTabelaGeral() {
         let tabelaHTML = `
-          <table border="1" style="width:100%; text-align:center;">
+          <table border="1">
             <thead>
               <tr>
                 <th>NOME</th>
@@ -199,17 +206,21 @@
 
           relatorio =
             relatorio +
-            `<hr>
-                     <h3>Aluno: ${aluno.nome}</h3>
-                     <p>A nota 1 foi ${aluno.notas[0].nota}, com o peso ${
-              aluno.notas[0].peso
-            } ficou: ${aluno.notas[0].nota * aluno.notas[0].peso}.</p>
-                     <p>A nota 2 foi ${aluno.notas[1].nota}, com o peso ${
+            `        
+            <h4>${aluno.nome}</h4>
+                     <p>A primeira nota foi ${
+                       aluno.notas[0].nota
+                     }, com o peso ${aluno.notas[0].peso} ficou: ${
+              aluno.notas[0].nota * aluno.notas[0].peso
+            }.</p>
+                     <p>A segunda nota foi ${aluno.notas[1].nota}, com o peso ${
               aluno.notas[1].peso
             } ficou: ${aluno.notas[1].nota * aluno.notas[1].peso}.</p>
-                     <p>A nota 3 foi ${aluno.notas[2].nota}, com o peso ${
-              aluno.notas[2].peso
-            } ficou ${aluno.notas[2].nota * aluno.notas[2].peso}.</p>
+                     <p>A terceira nota foi ${
+                       aluno.notas[2].nota
+                     }, com o peso ${aluno.notas[2].peso} ficou: ${
+              aluno.notas[2].nota * aluno.notas[2].peso
+            }.</p>
                      <p>O cálculo da média foi feito da seguinte forma:</p>
                      <ul>
                      <li><strong>Soma das notas com peso</strong>: ${somaNotasComPeso}</li>
@@ -221,6 +232,7 @@
                      <p>O aluno <strong>${
                        aluno.nome
                      }</strong> está <strong>${status}</strong></p>
+                     <hr>
                      `;
         });
         document.getElementById(`relatorio`).innerHTML = relatorio;
