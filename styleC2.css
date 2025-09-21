@@ -78,6 +78,23 @@ hr {
   text-transform: uppercase;
 }
 
+/* Estilo para os status na tabela */
+/* td:last-child {
+  font-weight: bold;
+} */
+
+td:last-child[data-status="APROVADO"] {
+  color: #2b6cb0;
+}
+
+td:last-child[data-status="PROVA FINAL"] {
+  color: #ef8c4a;
+}
+
+td:last-child[data-status="REPROVADO"] {
+  color: #dc3545;
+}
+
 /* Relatório detalhado */
 #relatorio {
   margin-top: 20px;

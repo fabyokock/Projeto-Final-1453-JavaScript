@@ -133,19 +133,19 @@
       // ----------------------------------------------------------------------
       function exibirTabelaGeral() {
         let tabelaHTML = `
-            <table border="1">
-              <thead>
-                <tr>
-                  <th>NOME</th>
-                  <th>NOTA 1</th>
-                  <th>NOTA 2</th>
-                  <th>NOTA 3</th>
-                  <th>MÉDIA</th>
-                  <th>STATUS</th>
-                </tr>
-              </thead>
-              <tbody>
-          `;
+                  <table border="1">
+                    <thead>
+                      <tr>
+                        <th>NOME</th>
+                        <th>NOTA 1</th>
+                        <th>NOTA 2</th>
+                        <th>NOTA 3</th>
+                        <th>MÉDIA</th>
+                        <th>STATUS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                `;
 
         turma.forEach((aluno) => {
           let somaNotasComPeso = 0;
@@ -167,23 +167,23 @@
           tabelaHTML =
             tabelaHTML +
             `
-              <tr>
-                <td>${aluno.nome}</td>
-                <td>${aluno.notas[0].nota}</td>
-                <td>${aluno.notas[1].nota}</td>
-                <td>${aluno.notas[2].nota}</td>
-                <td>${mediaFinal.toFixed(2)}</td>
-                <td>${status}</td>
-              </tr>
-            `;
+                    <tr>
+                      <td>${aluno.nome}</td>
+                      <td>${aluno.notas[0].nota}</td>
+                      <td>${aluno.notas[1].nota}</td>
+                      <td>${aluno.notas[2].nota}</td>
+                      <td>${mediaFinal.toFixed(2)}</td>
+                      <td data-status="${status}">${status}</td>
+                    </tr>
+                  `;
         });
 
         tabelaHTML =
           tabelaHTML +
           `
-              </tbody>
-            </table>
-          `;
+                    </tbody>
+                  </table>
+                `;
 
         document.getElementById(`tabelaGeral`).innerHTML = tabelaHTML;
       }
@@ -214,22 +214,26 @@
           relatorio =
             relatorio +
             `
-<div class="card">
-          <h4>${aluno.nome}</h4>
-          <p>A primeira nota foi ${aluno.notas[0].nota}, com o peso ${
+      <div class="card">
+                <h4>${aluno.nome}</h4>
+                <p>A primeira nota foi ${aluno.notas[0].nota}, com o peso ${
               aluno.notas[0].peso
             } ficou: ${aluno.notas[0].nota * aluno.notas[0].peso}.</p>
-          <p>A segunda nota foi ${aluno.notas[1].nota}, com o peso ${
+                <p>A segunda nota foi ${aluno.notas[1].nota}, com o peso ${
               aluno.notas[1].peso
             } ficou: ${aluno.notas[1].nota * aluno.notas[1].peso}.</p>
-          <p>A terceira nota foi ${aluno.notas[2].nota}, com o peso ${
+                <p>A terceira nota foi ${aluno.notas[2].nota}, com o peso ${
               aluno.notas[2].peso
-            } ficou: ${aluno.notas[2].nota * aluno.notas[2].peso}.</p>
-          <p><strong>Soma das notas com peso:</strong> ${somaNotasComPeso}</p>
-          <p><strong>Soma total dos pesos:</strong> ${somaPesos}</p>
-          <p><strong>Média final:</strong> ${mediaFinal.toFixed(2)}</p>
-          <p>Status: <strong>${status}</strong></p>
-        </div>`;
+            } ficou: ${(aluno.notas[2].nota * aluno.notas[2].peso).toFixed(
+              2
+            )}.</p>
+                <p><strong>Soma das notas com peso:</strong> ${somaNotasComPeso.toFixed(
+                  2
+                )}</p>
+                <p><strong>Soma total dos pesos:</strong> ${somaPesos}</p>
+                <p><strong>Média final:</strong> ${mediaFinal.toFixed(2)}</p>
+                <p>Status: <strong>${status}</strong></p>
+              </div>`;
         });
         document.getElementById(`relatorio`).innerHTML = relatorio;
       }
