@@ -65,6 +65,9 @@
         const nomeParaAlterar = window.prompt(
           `Digite o nome do aluno para alterar:`
         );
+
+        let encontrado = false;
+
         turma = turma.map((aluno) => {
           if (
             aluno.nome.toLocaleLowerCase() ===
@@ -84,14 +87,18 @@
             aluno.notas[1].nota = novaNota2;
             aluno.notas[2].nota = novaNota3;
 
+            encontrado = true;
+
             window.alert(
               `Os dados de ${aluno.nome} foram alterados com sucesso!`
             );
-          } else {
-            window.alert(`Aluno ${nomeParaAlterar} não encontrado.`);
           }
           return aluno;
         });
+
+        if (!encontrado) {
+          window.alert(`Aluno ${nomeParaAlterar} não encontrado.`);
+        }
 
         exibirTabelaGeral();
       }
@@ -154,7 +161,7 @@
             mediaFinal >= 7
               ? `APROVADO`
               : mediaFinal >= 5
-              ? `EM PROVA FINAL`
+              ? `PROVA FINAL`
               : `REPROVADO`;
 
           tabelaHTML =
@@ -201,7 +208,7 @@
             mediaFinal >= 7
               ? `APROVADO`
               : mediaFinal >= 5
-              ? `EM PROVA FINAL`
+              ? `PROVA FINAL`
               : `REPROVADO`;
 
           relatorio =
