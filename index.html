@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistema de Boletim</title>
-    <link rel="stylesheet" href="styleC.css" />
+    <link rel="stylesheet" href="styleC2.css" />
   </head>
   <body>
     <h1>SISTEMA DE BOLETIM</h1>
@@ -207,31 +207,22 @@
           relatorio =
             relatorio +
             `
-             <h4>${aluno.nome}</h4>
-              <p>A primeira nota foi ${aluno.notas[0].nota}, com o peso ${
+<div class="card">
+          <h4>${aluno.nome}</h4>
+          <p>A primeira nota foi ${aluno.notas[0].nota}, com o peso ${
               aluno.notas[0].peso
             } ficou: ${aluno.notas[0].nota * aluno.notas[0].peso}.</p>
-                     <p>A segunda nota foi ${aluno.notas[1].nota}, com o peso ${
+          <p>A segunda nota foi ${aluno.notas[1].nota}, com o peso ${
               aluno.notas[1].peso
             } ficou: ${aluno.notas[1].nota * aluno.notas[1].peso}.</p>
-                     <p>A terceira nota foi ${
-                       aluno.notas[2].nota
-                     }, com o peso ${aluno.notas[2].peso} ficou: ${
-              aluno.notas[2].nota * aluno.notas[2].peso
-            }.</p>
-                     <p>O cálculo da média foi feito da seguinte forma:</p>
-                     <ul>
-                     <li><strong>Soma das notas com peso</strong>: ${somaNotasComPeso}</li>
-                     <li><strong>Soma total dos pesos</strong>: ${somaPesos}</li>
-                     </ul>
-                     <p>Sendo assim, a média final foi: ${mediaFinal.toFixed(
-                       2
-                     )}</p>
-                     <p>O aluno <strong>${
-                       aluno.nome
-                     }</strong> está <strong>${status}</strong></p>
-                     <hr>
-                     `;
+          <p>A terceira nota foi ${aluno.notas[2].nota}, com o peso ${
+              aluno.notas[2].peso
+            } ficou: ${aluno.notas[2].nota * aluno.notas[2].peso}.</p>
+          <p><strong>Soma das notas com peso:</strong> ${somaNotasComPeso}</p>
+          <p><strong>Soma total dos pesos:</strong> ${somaPesos}</p>
+          <p><strong>Média final:</strong> ${mediaFinal.toFixed(2)}</p>
+          <p>Status: <strong>${status}</strong></p>
+        </div>`;
         });
         document.getElementById(`relatorio`).innerHTML = relatorio;
       }
