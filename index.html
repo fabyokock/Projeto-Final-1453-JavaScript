@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistema de Boletim</title>
-    <link rel="stylesheet" href="styleC2.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>SISTEMA DE BOLETIM</h1>
+    <h1><a href="index.html">SISTEMA DE BOLETIM</a></h1>
 
     <hr />
 
@@ -43,11 +43,24 @@
       // ----------------------------------------------------------------------
 
       function adicionarAluno() {
-        const nome = window.prompt(`Digite o nome do aluno:`);
-        const notas = [];
+        let nome;
+        do {
+          nome = window.prompt(`Digite o nome do aluno:`);
+        } while (nome === "" || nome === null || !isNaN(nome));
+
+        let notas = [];
         for (let i = 1; i <= 3; i++) {
-          const nota = Number(window.prompt(`Digite a nota ${i} de ${nome}:`));
-          notas.push({ nota: nota, peso: i });
+          let nota;
+          do {
+            nota = window.prompt(`Digite a nota ${i} de ${nome}:`);
+          } while (
+            nota === "" ||
+            nota === null ||
+            isNaN(nota) ||
+            Number(nota) < 0 ||
+            Number(nota) > 10
+          );
+          notas.push({ nota: Number(nota), peso: i });
         }
         const novoAluno = { nome: nome, notas: notas };
 
@@ -249,7 +262,7 @@
             `2 - Alterar dados de um aluno \n` +
             `3 - Excluir um aluno \n` +
             `4 - Gerar relatório detalhado \n` +
-            `5 - Sair`
+            `5 - Ver relatório e sair`
         );
         switch (opcao) {
           case `1`:
@@ -267,7 +280,7 @@
           case `5`:
             continuar = false;
             window.alert(
-              `Obrigado por utilizar o sistema. O programa será encerrado.`
+              `Obrigado por utilizar o Sistema de Boletim. O relatório será disponibilizado e, na sequência, o programa será encerrado.`
             );
             break;
           default:
