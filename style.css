@@ -116,6 +116,28 @@ td:last-child[data-status="REPROVADO"] {
   margin-bottom: 6px;
 }
 
+footer {
+  margin-top: 30px;
+  padding: 16px;
+  text-align: center;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  font-size: 16px;
+  color: #555;
+}
+
+footer p:first-child {
+  font-weight: bold;
+  color: #2b6cb0;
+  margin-bottom: 6px;
+}
+
+footer p:last-child {
+  font-size: 15px;
+  color: #777;
+}
+
 /* Responsividade */
 @media (max-width: 600px) {
   body {
@@ -147,5 +169,18 @@ td:last-child[data-status="REPROVADO"] {
     left: 10px;
     font-weight: bold;
     color: #666;
+  }
+
+  footer {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  footer p:first-child {
+    font-size: 14px;
+  }
+
+  footer p:last-child {
+    font-size: 13px;
   }
 }
