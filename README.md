@@ -4,9 +4,9 @@ Projeto final do curso Lógica de Programação com JavaScript - ADA TECH.
 
 Turma 1453. Setembro de 2025.
 
-Todas as orientações estão no link:
+## Entrega do Projeto:
 
-https://bruno-cabral.notion.site/1453-Logica-de-programa-o-2729e0ee3fbd80f785e5f9041cfcb6e2
+https://fabyokock.github.io/Projeto-Final-1453-JavaScript/
 
 ## Objetivo:
 
@@ -26,5 +26,9 @@ Dentre as funcionalidades, espera-se que seja possível:
 => Utilize prompt para entrada de dados e console.log para saida dos dados. Também será aceito o uso de uma pagina HTML, lembrando que não é obrigatório.
 
 => Faça o básico funcionar e depois se sobrar tempo pense melhorias.
+
+## Todas as orientações estão no link:
+
+https://bruno-cabral.notion.site/1453-Logica-de-programa-o-2729e0ee3fbd80f785e5f9041cfcb6e2
 
 Prazo final para entrega: 25/09/2025.
