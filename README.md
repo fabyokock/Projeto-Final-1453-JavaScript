@@ -32,3 +32,7 @@ Dentre as funcionalidades, espera-se que seja possível:
 https://bruno-cabral.notion.site/1453-Logica-de-programa-o-2729e0ee3fbd80f785e5f9041cfcb6e2
 
 Prazo final para entrega: 25/09/2025.
+
+## Todos os projetos realizados estão em:
+
+https://fabyokock.github.io/turma-1453-ADA/
